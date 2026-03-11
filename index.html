@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Hansita Bundel | WordPress Designer & Digital Marketer</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet"/>
+  <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet"/>
+  <style>
+    :root{
+      --blue:#2563eb;--blue-bright:#3b82f6;--blue-glow:#60a5fa;--blue-dim:rgba(37,99,235,.15);
+      --white:#ffffff;--off-white:#f8fafc;--light:#e2e8f0;--muted:#94a3b8;
+      --dark:#020817;--dark2:#0f172a;--dark3:#1e293b;--dark4:#334155;
+      --text:#1e293b;--text-light:#64748b;
+    }
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+    html{scroll-behavior:smooth;}
+    body{font-family:'Space Grotesk',sans-serif;background:var(--white);color:var(--text);overflow-x:hidden;}
+    h1,h2,h3,h4,h5{font-family:'Syne',sans-serif;}
+    img{max-width:100%;height:auto;display:block;}
+    ::-webkit-scrollbar{width:4px;}
+    ::-webkit-scrollbar-track{background:var(--dark2);}
+    ::-webkit-scrollbar-thumb{background:var(--blue);border-radius:2px;}
+
+    /* PRELOADER */
+    #preloader{position:fixed;inset:0;background:var(--dark);display:flex;align-items:center;justify-content:center;z-index:9999;transition:opacity .7s,visibility .7s;}
+    #preloader.hide{opacity:0;visibility:hidden;pointer-events:none;}
+    .pre-inner{text-align:center;}
+    .pre-logo{font-family:'Syne',sans-serif;font-size:3.5rem;font-weight:800;color:var(--white);letter-spacing:-2px;}
+    .pre-logo span{color:var(--blue-bright);}
+    .pre-line{width:0;height:2px;background:linear-gradient(90deg,var(--blue),var(--blue-glow));margin:16px auto 0;border-radius:2px;animation:preLine 1.8s ease forwards;}
+    .pre-sub{font-size:.72rem;letter-spacing:6px;text-transform:uppercase;color:var(--muted);margin-top:12px;opacity:0;animation:fadeIn .5s ease 1.2s forwards;}
+    @keyframes preLine{from{width:0}to{width:180px}}
+    @keyframes fadeIn{from{opacity:0}to{opacity:1}}
+
+    /* NAVBAR */
+    .navbar{background:rgba(2,8,23,.92);backdrop-filter:blur(20px);border-bottom:1px solid rgba(37,99,235,.2);padding:14px 0;position:fixed;width:100%;top:0;z-index:1000;transition:all .3s;}
+    .navbar-brand{font-family:'Syne',sans-serif;font-size:1.5rem;font-weight:800;color:var(--white)!important;letter-spacing:-1px;}
+    .navbar-brand span{color:var(--blue-bright);}
+    .navbar-toggler{border-color:rgba(59,130,246,.4);padding:5px 9px;}
+    .navbar-toggler:focus{box-shadow:none;}
+    .navbar-toggler-icon{background-image:url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='%233b82f6' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");}
+    .navbar-collapse{background:rgba(2,8,23,.98);border:1px solid rgba(37,99,235,.2);border-radius:6px;padding:8px;margin-top:10px;}
+    @media(min-width:992px){.navbar-collapse{background:transparent;border:none;padding:0;margin-top:0;}}
+    .nav-link{color:rgba(255,255,255,.6)!important;font-size:.78rem;letter-spacing:2px;text-transform:uppercase;font-weight:500;padding:10px 14px!important;transition:color .3s;position:relative;}
+    .nav-link::after{content:'';position:absolute;bottom:6px;left:14px;width:0;height:1px;background:var(--blue-bright);transition:width .3s;}
+    .nav-link:hover{color:var(--white)!important;}
+    .nav-link:hover::after,.nav-link.active-link::after{width:calc(100% - 28px);}
+    .nav-link.active-link{color:var(--white)!important;}
+
+    /* HERO */
+    #hero{min-height:100svh;display:flex;align-items:center;background:var(--dark);position:relative;overflow:hidden;padding:110px 0 80px;}
+    .hero-grid{position:absolute;inset:0;pointer-events:none;background-image:linear-gradient(rgba(37,99,235,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(37,99,235,.07) 1px,transparent 1px);background-size:44px 44px;}
+    .hero-grid-fade{position:absolute;inset:0;background:radial-gradient(ellipse 70% 70% at 50% 50%,transparent 40%,var(--dark) 100%);pointer-events:none;}
+    .hero-orb{position:absolute;border-radius:50%;pointer-events:none;animation:orbFloat ease-in-out infinite;}
+    .hero-orb-1{width:500px;height:500px;background:radial-gradient(circle,rgba(37,99,235,.18) 0%,transparent 70%);top:-100px;right:-80px;animation-duration:8s;}
+    .hero-orb-2{width:300px;height:300px;background:radial-gradient(circle,rgba(96,165,250,.1) 0%,transparent 70%);bottom:0;left:-60px;animation-duration:11s;animation-delay:2s;}
+    @keyframes orbFloat{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-24px) scale(1.05)}}
+    .scan-line{position:absolute;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(59,130,246,.4),transparent);animation:scan 4s linear infinite;pointer-events:none;}
+    @keyframes scan{0%{top:-2px}100%{top:100%}}
+    .hero-inner{position:relative;z-index:1;}
+    .hero-eyebrow{display:inline-flex;align-items:center;gap:8px;background:rgba(37,99,235,.12);border:1px solid rgba(37,99,235,.3);color:var(--blue-glow);font-size:.7rem;letter-spacing:3px;text-transform:uppercase;padding:6px 14px;border-radius:100px;margin-bottom:24px;animation:fadeInDown 1s ease .4s both;}
+    .hero-eyebrow-dot{width:6px;height:6px;background:var(--blue-bright);border-radius:50%;animation:pulse 2s ease infinite;}
+    @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.8)}}
+    .hero-hi{font-family:'Space Grotesk',sans-serif;font-size:1rem;color:rgba(255,255,255,.4);letter-spacing:3px;text-transform:uppercase;margin-bottom:8px;animation:fadeInUp 1s ease .45s both;}
+    .hero-name{font-size:clamp(2.2rem,5.5vw,4.5rem);font-weight:800;line-height:1.05;color:var(--white);letter-spacing:-1px;animation:fadeInUp 1s ease .5s both;word-break:break-word;}
+    .hero-name .blue{color:var(--blue-bright);}
+    .hero-typed-wrap{font-size:clamp(.9rem,2.5vw,1.1rem);color:var(--muted);margin-top:16px;min-height:28px;letter-spacing:1px;animation:fadeInUp 1s ease .6s both;}
+    .hero-typed-wrap .typed-text{color:var(--blue-bright);font-weight:600;}
+    .hero-cursor{display:inline-block;width:2px;height:1em;background:var(--blue-bright);margin-left:2px;vertical-align:middle;animation:blink .7s step-end infinite;}
+    @keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+    .hero-tagline{font-size:clamp(.88rem,2vw,1rem);color:rgba(255,255,255,.5);max-width:520px;line-height:1.85;margin-top:20px;animation:fadeInUp 1s ease .7s both;}
+    .hero-btns{animation:fadeInUp 1s ease .8s both;}
+    .btn-blue{background:var(--blue);color:var(--white);font-weight:600;font-size:.8rem;letter-spacing:1.5px;text-transform:uppercase;padding:14px 28px;border:none;border-radius:6px;transition:all .3s;text-decoration:none;display:inline-block;cursor:pointer;white-space:nowrap;}
+    .btn-blue:hover{background:var(--blue-bright);color:var(--white);transform:translateY(-2px);box-shadow:0 8px 30px rgba(37,99,235,.5);}
+    .btn-outline-blue{background:transparent;color:var(--blue-bright);border:1px solid rgba(59,130,246,.5);font-weight:600;font-size:.8rem;letter-spacing:1.5px;text-transform:uppercase;padding:13px 28px;border-radius:6px;transition:all .3s;text-decoration:none;display:inline-block;white-space:nowrap;}
+    .btn-outline-blue:hover{background:rgba(37,99,235,.15);border-color:var(--blue-bright);color:var(--white);transform:translateY(-2px);}
+    .hero-stats{display:flex;gap:32px;margin-top:40px;flex-wrap:wrap;animation:fadeInUp 1s ease .9s both;}
+    .stat-num{font-family:'Syne',sans-serif;font-size:clamp(1.8rem,5vw,2.5rem);font-weight:800;color:var(--white);display:block;letter-spacing:-1px;}
+    .stat-num span{color:var(--blue-bright);}
+    .stat-label{font-size:.68rem;letter-spacing:3px;text-transform:uppercase;color:var(--muted);}
+    .stat-divider{width:1px;background:rgba(255,255,255,.1);align-self:stretch;}
+
+    /* HERO IMAGE */
+    .hero-img-col{margin-top:52px;}
+    @media(min-width:992px){.hero-img-col{margin-top:0;}}
+    .hero-img-wrap{position:relative;display:flex;justify-content:center;animation:fadeInRight 1.2s ease .5s both;}
+    .hero-img-frame{width:min(300px,76vw);height:min(370px,94vw);border-radius:12px;overflow:hidden;position:relative;background:var(--dark3);flex-shrink:0;border:1px solid rgba(37,99,235,.3);}
+    .hero-img-frame::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(37,99,235,.15),transparent 60%);z-index:2;pointer-events:none;}
+    .hero-img-frame img{width:100%;height:100%;object-fit:cover;object-position:top;position:relative;z-index:1;}
+    .hero-img-placeholder{position:absolute;inset:0;display:none;flex-direction:column;align-items:center;justify-content:center;z-index:1;}
+    .hero-corner{position:absolute;width:20px;height:20px;border-color:var(--blue-bright);border-style:solid;z-index:3;}
+    .hero-corner.tl{top:-1px;left:-1px;border-width:2px 0 0 2px;border-radius:12px 0 0 0;}
+    .hero-corner.tr{top:-1px;right:-1px;border-width:2px 2px 0 0;border-radius:0 12px 0 0;}
+    .hero-corner.bl{bottom:-1px;left:-1px;border-width:0 0 2px 2px;border-radius:0 0 0 12px;}
+    .hero-corner.br{bottom:-1px;right:-1px;border-width:0 2px 2px 0;border-radius:0 0 12px 0;}
+    .hero-badge{position:absolute;bottom:10px;left:50%;transform:translateX(-50%);background:rgba(2,8,23,.9);backdrop-filter:blur(10px);border:1px solid rgba(37,99,235,.4);color:var(--blue-glow);padding:8px 18px;border-radius:100px;font-size:.72rem;font-weight:600;letter-spacing:1px;white-space:nowrap;z-index:4;animation:badgePop .6s ease 1.4s both;}
+    @keyframes badgePop{from{opacity:0;transform:translateX(-50%) translateY(8px)}to{opacity:1;transform:translateX(-50%) translateY(0)}}
+    .hero-glow-ring{position:absolute;width:calc(min(300px,76vw) + 60px);height:calc(min(370px,94vw) + 60px);top:50%;left:50%;transform:translate(-50%,-50%);border:1px solid rgba(37,99,235,.15);border-radius:16px;animation:ringPulse 3s ease-in-out infinite;pointer-events:none;}
+    @keyframes ringPulse{0%,100%{opacity:.4;transform:translate(-50%,-50%) scale(1)}50%{opacity:.8;transform:translate(-50%,-50%) scale(1.02)}}
+
+    /* COMMONS */
+    section{padding:80px 0;}
+    @media(min-width:768px){section{padding:100px 0;}}
+    .section-eyebrow{font-size:.68rem;letter-spacing:4px;text-transform:uppercase;color:var(--blue);margin-bottom:10px;display:flex;align-items:center;gap:10px;}
+    .section-eyebrow::before{content:'';width:28px;height:1px;background:var(--blue);}
+    .section-title{font-size:clamp(1.9rem,4.5vw,3rem);font-weight:800;line-height:1.1;margin-bottom:16px;letter-spacing:-1px;}
+    .section-line{width:48px;height:3px;background:var(--blue);border-radius:2px;margin-bottom:28px;}
+    .section-line.center{margin-left:auto;margin-right:auto;}
+    .divider-light{border:none;height:1px;background:var(--light);margin:0;}
+    .divider-dark{border:none;height:1px;background:rgba(255,255,255,.06);margin:0;}
+
+    /* ABOUT */
+    #about{background:var(--white);}
+    .about-text{color:var(--text-light);font-size:.96rem;line-height:1.95;}
+    .about-detail{display:flex;align-items:flex-start;gap:12px;margin-bottom:14px;}
+    .about-detail-icon{width:34px;height:34px;background:var(--blue-dim);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+    .about-detail-icon i{color:var(--blue);font-size:.95rem;}
+    .about-detail-text{font-size:.9rem;color:var(--text-light);word-break:break-word;padding-top:6px;}
+    .exp-box{background:var(--dark2);border:1px solid rgba(37,99,235,.2);border-radius:12px;padding:28px;margin-top:28px;position:relative;overflow:hidden;}
+    .exp-box::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%;background:linear-gradient(180deg,var(--blue),var(--blue-glow));}
+    .exp-box h5{color:var(--white);font-family:'Syne',sans-serif;font-size:1.1rem;margin-bottom:4px;}
+    .exp-box .badge-role{font-size:.7rem;color:var(--blue-glow);letter-spacing:1px;text-transform:uppercase;margin-bottom:14px;display:block;}
+    .exp-box ul{list-style:none;padding:0;margin:0;}
+    .exp-box ul li{color:rgba(255,255,255,.6);font-size:.86rem;padding:5px 0 5px 18px;position:relative;line-height:1.6;}
+    .exp-box ul li::before{content:'›';color:var(--blue-bright);position:absolute;left:0;font-size:1rem;}
+    .counter-box{background:var(--dark2);border:1px solid rgba(37,99,235,.15);border-radius:12px;padding:22px 16px;text-align:center;transition:all .3s;position:relative;overflow:hidden;}
+    .counter-box::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--blue),var(--blue-glow));transform:scaleX(0);transition:transform .3s;transform-origin:left;}
+    .counter-box:hover::after{transform:scaleX(1);}
+    .counter-box:hover{border-color:rgba(37,99,235,.4);transform:translateY(-4px);box-shadow:0 12px 40px rgba(37,99,235,.15);}
+    .counter-num{font-family:'Syne',sans-serif;font-size:2.2rem;color:var(--blue-bright);font-weight:800;display:block;letter-spacing:-1px;}
+    .counter-label{font-size:.68rem;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.4);margin-top:4px;}
+
+    /* SKILLS */
+    #skills{background:var(--dark);}
+    #skills .section-title{color:var(--white);}
+    .skill-category{background:var(--dark2);border:1px solid rgba(37,99,235,.12);border-radius:12px;padding:26px 22px;height:100%;transition:all .3s;position:relative;overflow:hidden;}
+    .skill-category::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--blue),transparent);opacity:0;transition:opacity .3s;}
+    .skill-category:hover::before{opacity:1;}
+    .skill-category:hover{border-color:rgba(37,99,235,.35);transform:translateY(-4px);box-shadow:0 16px 50px rgba(37,99,235,.12);}
+    .skill-cat-title{font-family:'Syne',sans-serif;font-size:.72rem;letter-spacing:3px;text-transform:uppercase;color:var(--blue-glow);margin-bottom:20px;display:flex;align-items:center;gap:10px;}
+    .skill-cat-title::after{content:'';flex:1;height:1px;background:rgba(37,99,235,.2);}
+    .skill-pill{display:inline-block;padding:6px 12px;background:rgba(37,99,235,.1);border:1px solid rgba(37,99,235,.2);border-radius:100px;font-size:.78rem;color:var(--blue-glow);margin:3px;transition:all .3s;cursor:default;}
+    .skill-pill:hover{background:rgba(37,99,235,.2);border-color:var(--blue-bright);color:var(--white);}
+    .skill-bar-wrap{margin-bottom:15px;}
+    .skill-bar-label{display:flex;justify-content:space-between;font-size:.8rem;color:rgba(255,255,255,.6);margin-bottom:6px;}
+    .skill-bar-track{height:3px;background:rgba(255,255,255,.06);border-radius:2px;overflow:hidden;}
+    .skill-bar-fill{height:100%;background:linear-gradient(90deg,var(--blue),var(--blue-glow));border-radius:2px;width:0;transition:width 1.8s cubic-bezier(.4,0,.2,1);box-shadow:0 0 8px rgba(59,130,246,.5);}
+
+    /* PORTFOLIO */
+    #portfolio{background:var(--off-white);}
+    .project-card{background:var(--white);border:1px solid var(--light);border-radius:12px;overflow:hidden;transition:all .4s;text-decoration:none;display:block;color:inherit;height:100%;}
+    .project-card:hover{border-color:rgba(37,99,235,.3);transform:translateY(-6px);box-shadow:0 20px 60px rgba(37,99,235,.12);color:inherit;}
+    .project-thumb{height:200px;overflow:hidden;position:relative;background:var(--dark3);}
+    .project-thumb img{width:100%;height:100%;object-fit:cover;object-position:top;transition:transform .6s;position:relative;z-index:1;}
+    .project-card:hover .project-thumb img{transform:scale(1.06);}
+    .thumb-fallback{display:none;position:absolute;inset:0;align-items:center;justify-content:center;background:var(--dark3);}
+    .project-overlay{position:absolute;inset:0;background:rgba(37,99,235,.15);display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .3s;z-index:2;}
+    .project-card:hover .project-overlay{opacity:1;}
+    .project-overlay i{font-size:2.5rem;color:var(--white);filter:drop-shadow(0 0 12px rgba(59,130,246,.9));}
+    .project-info{padding:20px;}
+    .project-tag{font-size:.64rem;letter-spacing:2px;text-transform:uppercase;color:var(--blue);margin-bottom:7px;font-weight:600;}
+    .project-info h4{font-size:1rem;margin-bottom:7px;color:var(--text);}
+    .project-info p{font-size:.84rem;color:var(--text-light);line-height:1.7;}
+    .project-arrow{color:var(--blue);font-size:.74rem;letter-spacing:1px;text-transform:uppercase;margin-top:12px;display:flex;align-items:center;gap:6px;transition:gap .3s;font-weight:600;}
+    .project-card:hover .project-arrow{gap:12px;}
+
+    /* SERVICES */
+    #services{background:var(--dark2);}
+    #services .section-title{color:var(--white);}
+    .service-card{background:var(--dark3);border:1px solid rgba(37,99,235,.1);border-radius:12px;padding:28px 24px;height:100%;transition:all .3s;position:relative;overflow:hidden;}
+    .service-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--blue),var(--blue-glow));transform:scaleX(0);transition:transform .4s;transform-origin:left;}
+    .service-card:hover::after{transform:scaleX(1);}
+    .service-card:hover{border-color:rgba(37,99,235,.3);transform:translateY(-5px);box-shadow:0 16px 50px rgba(37,99,235,.15);}
+    .service-num{font-family:'Syne',sans-serif;font-size:3rem;font-weight:800;color:rgba(37,99,235,.15);line-height:1;margin-bottom:12px;letter-spacing:-2px;transition:color .3s;}
+    .service-card:hover .service-num{color:rgba(37,99,235,.3);}
+    .service-icon{width:48px;height:48px;background:rgba(37,99,235,.1);border:1px solid rgba(37,99,235,.2);border-radius:10px;display:flex;align-items:center;justify-content:center;margin-bottom:18px;transition:all .3s;}
+    .service-card:hover .service-icon{background:rgba(37,99,235,.2);border-color:var(--blue);}
+    .service-icon i{color:var(--blue-bright);font-size:1.3rem;}
+    .service-card h5{font-size:1rem;margin-bottom:10px;color:var(--white);}
+    .service-card p{color:rgba(255,255,255,.45);font-size:.85rem;line-height:1.7;}
+
+    /* EDUCATION */
+    #education{background:var(--white);}
+    .edu-item{display:flex;gap:20px;margin-bottom:28px;}
+    .edu-dot-wrap{display:flex;flex-direction:column;align-items:center;}
+    .edu-dot{width:14px;height:14px;border:2px solid var(--blue);border-radius:50%;background:var(--white);flex-shrink:0;margin-top:5px;transition:all .3s;}
+    .edu-item:hover .edu-dot{background:var(--blue);box-shadow:0 0 12px rgba(37,99,235,.5);}
+    .edu-line{flex:1;width:1px;background:var(--light);margin-top:6px;}
+    .edu-content{background:var(--off-white);border:1px solid var(--light);border-radius:10px;padding:18px 22px;flex:1;transition:all .3s;}
+    .edu-item:hover .edu-content{border-color:rgba(37,99,235,.3);transform:translateX(5px);box-shadow:0 8px 30px rgba(37,99,235,.08);}
+    .edu-year{font-size:.68rem;letter-spacing:2px;text-transform:uppercase;color:var(--blue);margin-bottom:5px;font-weight:600;}
+    .edu-content h5{font-size:.98rem;margin-bottom:3px;color:var(--text);}
+    .edu-content p{color:var(--text-light);font-size:.85rem;}
+
+    /* CONTACT */
+    #contact{background:var(--dark);}
+    #contact .section-title{color:var(--white);}
+    .contact-card{background:var(--dark2);border:1px solid rgba(37,99,235,.12);border-radius:10px;padding:18px;display:flex;gap:14px;align-items:flex-start;transition:all .3s;text-decoration:none;color:inherit;margin-bottom:12px;}
+    .contact-card:hover{border-color:rgba(37,99,235,.4);transform:translateX(6px);color:inherit;box-shadow:0 8px 30px rgba(37,99,235,.1);}
+    .contact-card-icon{width:42px;height:42px;flex-shrink:0;background:rgba(37,99,235,.1);border:1px solid rgba(37,99,235,.2);border-radius:8px;display:flex;align-items:center;justify-content:center;transition:all .3s;}
+    .contact-card:hover .contact-card-icon{background:rgba(37,99,235,.2);border-color:var(--blue-bright);}
+    .contact-card-icon i{color:var(--blue-bright);font-size:1.05rem;}
+    .contact-card-label{font-size:.66rem;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:2px;}
+    .contact-card-val{font-size:.88rem;word-break:break-all;color:rgba(255,255,255,.8);}
+    .contact-form input,.contact-form textarea{background:var(--dark2);border:1px solid rgba(37,99,235,.15);border-radius:8px;color:var(--white);padding:13px 16px;font-family:'Space Grotesk',sans-serif;font-size:.9rem;width:100%;margin-bottom:13px;outline:none;transition:border-color .3s,box-shadow .3s;-webkit-appearance:none;appearance:none;}
+    .contact-form input:focus,.contact-form textarea:focus{border-color:var(--blue-bright);box-shadow:0 0 0 3px rgba(37,99,235,.15);}
+    .contact-form input::placeholder,.contact-form textarea::placeholder{color:rgba(255,255,255,.25);}
+    .contact-form textarea{height:115px;resize:vertical;}
+
+    /* FOOTER */
+    footer{background:var(--dark2);border-top:1px solid rgba(37,99,235,.12);padding:40px 0;text-align:center;}
+    .footer-brand{font-family:'Syne',sans-serif;font-size:1.5rem;font-weight:800;color:var(--white);margin-bottom:8px;letter-spacing:-1px;}
+    .footer-brand span{color:var(--blue-bright);}
+    .footer-sub{font-size:.75rem;letter-spacing:3px;text-transform:uppercase;color:var(--muted);margin-bottom:20px;}
+    .social-links{display:flex;justify-content:center;gap:10px;margin-bottom:20px;flex-wrap:wrap;}
+    .social-link{width:40px;height:40px;background:rgba(37,99,235,.08);border:1px solid rgba(37,99,235,.2);border-radius:8px;display:flex;align-items:center;justify-content:center;color:var(--muted);text-decoration:none;transition:all .3s;font-size:1rem;}
+    .social-link:hover{background:rgba(37,99,235,.2);border-color:var(--blue-bright);color:var(--white);transform:translateY(-3px);}
+    .footer-copy{color:rgba(255,255,255,.25);font-size:.76rem;line-height:1.7;padding:0 16px;}
+
+    @keyframes fadeInUp{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
+    @keyframes fadeInDown{from{opacity:0;transform:translateY(-20px)}to{opacity:1;transform:translateY(0)}}
+    @keyframes fadeInRight{from{opacity:0;transform:translateX(40px)}to{opacity:1;transform:translateX(0)}}
+
+    /* MOBILE */
+    @media(max-width:991px){
+      .hero-img-col{overflow:hidden;padding-bottom:40px;}
+      .hero-glow-ring{display:none;}
+      .hero-badge{font-size:.68rem;padding:7px 14px;bottom:8px;}
+    }
+    @media(max-width:575px){
+      [data-aos="fade-left"],[data-aos="fade-right"]{transform:none!important;}
+      .hero-btns{display:flex;flex-direction:row;flex-wrap:wrap;gap:10px;}
+      .hero-btns .btn-blue,.hero-btns .btn-outline-blue{flex:1;min-width:120px;text-align:center;padding:12px 14px;font-size:.75rem;}
+      .hero-name{font-size:clamp(1.9rem,9vw,2.8rem)!important;}
+      .hero-img-frame{width:min(260px,70vw);height:min(320px,86vw);}
+      .stat-divider{display:none;}
+    }
+  </style>
+</head>
+<body>
+
+<div id="preloader">
+  <div class="pre-inner">
+    <div class="pre-logo">HB<span>.</span></div>
+    <div class="pre-line"></div>
+    <div class="pre-sub">Loading Portfolio</div>
+  </div>
+</div>
+
+<nav class="navbar navbar-expand-lg" id="mainNav">
+  <div class="container">
+    <a class="navbar-brand" href="#hero">Hansita<span>.</span></a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu" aria-label="Menu">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-end" id="navMenu">
+      <ul class="navbar-nav">
+        <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+        <li class="nav-item"><a class="nav-link" href="#skills">Skills</a></li>
+        <li class="nav-item"><a class="nav-link" href="#portfolio">Portfolio</a></li>
+        <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
+        <li class="nav-item"><a class="nav-link" href="#education">Education</a></li>
+        <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<section id="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-grid-fade"></div>
+  <div class="hero-orb hero-orb-1"></div>
+  <div class="hero-orb hero-orb-2"></div>
+  <div class="scan-line"></div>
+  <div class="container hero-inner">
+    <div class="row align-items-center">
+      <div class="col-lg-7">
+        <div class="hero-eyebrow"><span class="hero-eyebrow-dot"></span>Available for Freelance Projects</div>
+        <p class="hero-hi">Hi, I'm</p>
+        <h1 class="hero-name"><span class="blue">Hansita</span><br>Bundel</h1>
+        <div class="hero-typed-wrap"><span id="typed-output" class="typed-text"></span><span class="hero-cursor"></span></div>
+        <p class="hero-tagline">Helping brands build a strong online presence through strategic digital marketing and modern website design.</p>
+        <div class="hero-btns mt-4 d-flex flex-wrap gap-3">
+          <a href="#portfolio" class="btn-blue">View My Work</a>
+          <a href="#contact" class="btn-outline-blue">Hire Me</a>
+        </div>
+        <div class="hero-stats">
+          <div><span class="stat-num">2<span>+</span></span><span class="stat-label">Projects</span></div>
+          <div class="stat-divider"></div>
+          <div><span class="stat-num">1<span>+</span></span><span class="stat-label">Year Exp.</span></div>
+          <div class="stat-divider"></div>
+          <div><span class="stat-num">8<span>+</span></span><span class="stat-label">Skills</span></div>
+        </div>
+      </div>
+      <div class="col-lg-5 hero-img-col">
+        <div class="hero-img-wrap">
+          <div class="hero-glow-ring"></div>
+          <div class="hero-img-frame">
+            <div class="hero-corner tl"></div><div class="hero-corner tr"></div>
+            <div class="hero-corner bl"></div><div class="hero-corner br"></div>
+            <img src="hanshita.jpeg" alt="Hansita Bundel" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"/>
+            <div class="hero-img-placeholder">
+              <i class="bi bi-person" style="font-size:5rem;color:rgba(59,130,246,.2);"></i>
+              <span style="color:var(--muted);font-size:.76rem;margin-top:8px;">hansita.jpg</span>
+            </div>
+          </div>
+          <div class="hero-badge"><i class="bi bi-check-circle-fill me-1" style="font-size:.6rem;"></i>WordPress &amp; Digital Marketing</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider-light"/>
+
+<section id="about">
+  <div class="container">
+    <div class="row align-items-start g-4 g-lg-5">
+      <div class="col-lg-5" data-aos="fade-up">
+        <p class="section-eyebrow">Who I Am</p>
+        <h2 class="section-title">About Me</h2>
+        <div class="section-line"></div>
+        <p class="about-text">I am an enthusiastic digital marketing professional and web designer who enjoys helping businesses expand their presence online. My focus is on combining creative website design with effective digital marketing strategies.</p>
+        <p class="about-text mt-3">I have developed skills in SEO, WordPress website development, and social media marketing. I enjoy designing clean, user-friendly websites that provide a great experience for visitors.</p>
+        <p class="about-text mt-3">I am motivated, detail-focused, and always eager to take on projects that allow me to improve my marketing and design skills. I continuously work on improving my knowledge of digital marketing tools and industry trends.</p>
+        <div class="mt-4">
+          <div class="about-detail"><div class="about-detail-icon"><i class="bi bi-geo-alt"></i></div><div class="about-detail-text">Ajmer, Rajasthan, India</div></div>
+          <div class="about-detail"><div class="about-detail-icon"><i class="bi bi-envelope"></i></div><div class="about-detail-text">hanshubundel@gmail.com</div></div>
+          <div class="about-detail"><div class="about-detail-icon"><i class="bi bi-telephone"></i></div><div class="about-detail-text">+91 8005572323</div></div>
+          <div class="about-detail"><div class="about-detail-icon"><i class="bi bi-translate"></i></div><div class="about-detail-text">English &amp; Hindi</div></div>
+        </div>
+        <div class="mt-4"><a href="#" class="btn-blue">Download Resume</a></div>
+      </div>
+      <div class="col-lg-7" data-aos="fade-up" data-aos-delay="100">
+        <div class="exp-box">
+          <h5>ASBA Digital</h5>
+          <span class="badge-role">Digital Marketing &amp; Web Design Intern &middot; OVS Learning · 2 Months</span>
+          <ul>
+            <li>Created digital marketing creatives — social media posts, banners, and promotional materials</li>
+            <li>Developed graphic assets to support branding initiatives, marketing campaigns, and short-form content</li>
+            <li>Assisted in designing website visuals and layouts to enhance user engagement and overall presentation</li>
+            <li>Supported social media marketing efforts by producing consistent, brand-aligned visual content</li>
+            <li>Actively participated in campaign planning, brainstorming sessions, and design discussions</li>
+            <li>Uses AI tools to improve campaigns, content creation, and video production for better results</li>
+          </ul>
+        </div>
+        <div class="row g-3 mt-1">
+          <div class="col-4" data-aos="zoom-in" data-aos-delay="150"><div class="counter-box"><span class="counter-num" data-target="2">0</span><span class="counter-label">Projects</span></div></div>
+          <div class="col-4" data-aos="zoom-in" data-aos-delay="250"><div class="counter-box"><span class="counter-num" data-target="1">0</span><span class="counter-label">Year Exp+</span></div></div>
+          <div class="col-4" data-aos="zoom-in" data-aos-delay="350"><div class="counter-box"><span class="counter-num" data-target="8">0</span><span class="counter-label">Skills</span></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider-light"/>
+
+<section id="skills">
+  <div class="container">
+    <div class="text-center mb-5" data-aos="fade-up">
+      <p class="section-eyebrow" style="justify-content:center;">What I Know</p>
+      <h2 class="section-title">My Skills</h2>
+      <div class="section-line center"></div>
+    </div>
+    <div class="row g-4">
+      <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+        <div class="skill-category">
+          <div class="skill-cat-title">Digital Marketing</div>
+          <div class="skill-bar-wrap"><div class="skill-bar-label"><span>SEO (On/Off Page)</span><span>82%</span></div><div class="skill-bar-track"><div class="skill-bar-fill" data-width="82"></div></div></div>
+          <div class="skill-bar-wrap"><div class="skill-bar-label"><span>Social Media Marketing</span><span>88%</span></div><div class="skill-bar-track"><div class="skill-bar-fill" data-width="88"></div></div></div>
+          <div class="skill-bar-wrap"><div class="skill-bar-label"><span>Google Ads</span><span>75%</span></div><div class="skill-bar-track"><div class="skill-bar-fill" data-width="75"></div></div></div>
+          <div class="skill-bar-wrap"><div class="skill-bar-label"><span>Meta Ads</span><span>78%</span></div><div class="skill-bar-track"><div class="skill-bar-fill" data-width="78"></div></div></div>
+          <div class="skill-bar-wrap"><div class="skill-bar-label"><span>Content Marketing</span><span>84%</span></div><div class="skill-bar-track"><div class="skill-bar-fill" data-width="84"></div></div></div>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+        <div class="skill-category">
+          <div class="skill-cat-title">WordPress &amp; Web</div>
+          <div class="skill-bar-wrap"><div class="skill-bar-label"><span>WordPress</span><span>85%</span></div><div class="skill-bar-track"><div class="skill-bar-fill" data-width="85"></div></div></div>
+          <div class="skill-bar-wrap"><div class="skill-bar-label"><span>Elementor</span><span>88%</span></div><div class="skill-bar-track"><div class="skill-bar-fill" data-width="88"></div></div></div>
+          <div class="skill-bar-wrap"><div class="skill-bar-label"><span>Landing Page Design</span><span>85%</span></div><div class="skill-bar-track"><div class="skill-bar-fill" data-width="85"></div></div></div>
+          <div class="skill-bar-wrap"><div class="skill-bar-label"><span>Website SEO</span><span>80%</span></div><div class="skill-bar-track"><div class="skill-bar-fill" data-width="80"></div></div></div>
+          <div class="skill-bar-wrap"><div class="skill-bar-label"><span>Website UI Design</span><span>78%</span></div><div class="skill-bar-track"><div class="skill-bar-fill" data-width="78"></div></div></div>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
+        <div class="skill-category">
+          <div class="skill-cat-title">Design &amp; Creative</div>
+          <div class="skill-bar-wrap"><div class="skill-bar-label"><span>Adobe Photoshop</span><span>85%</span></div><div class="skill-bar-track"><div class="skill-bar-fill" data-width="85"></div></div></div>
+          <div class="skill-bar-wrap"><div class="skill-bar-label"><span>Adobe Illustrator</span><span>80%</span></div><div class="skill-bar-track"><div class="skill-bar-fill" data-width="80"></div></div></div>
+          <div class="skill-bar-wrap"><div class="skill-bar-label"><span>CorelDRAW</span><span>75%</span></div><div class="skill-bar-track"><div class="skill-bar-fill" data-width="75"></div></div></div>
+          <div class="skill-bar-wrap"><div class="skill-bar-label"><span>Premiere Pro</span><span>78%</span></div><div class="skill-bar-track"><div class="skill-bar-fill" data-width="78"></div></div></div>
+          <div class="skill-bar-wrap"><div class="skill-bar-label"><span>Visual Content Creation</span><span>86%</span></div><div class="skill-bar-track"><div class="skill-bar-fill" data-width="86"></div></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="mt-5 text-center" data-aos="fade-up">
+      <p class="section-eyebrow mb-3" style="justify-content:center;">Soft Skills</p>
+      <span class="skill-pill">Strong Communication</span>
+      <span class="skill-pill">Team Collaboration</span>
+      <span class="skill-pill">Time Management</span>
+      <span class="skill-pill">Creative Problem-Solving</span>
+      <span class="skill-pill">Fast Learner</span>
+      <span class="skill-pill">Attention to Detail</span>
+      <span class="skill-pill">Creative Thinking</span>
+    </div>
+  </div>
+</section>
+
+<hr class="divider-dark"/>
+
+<section id="portfolio">
+  <div class="container">
+    <div class="text-center mb-5" data-aos="fade-up">
+      <p class="section-eyebrow" style="justify-content:center;">My Work</p>
+      <h2 class="section-title">Website Portfolio</h2>
+      <div class="section-line center"></div>
+      <p style="color:var(--text-light);font-size:.9rem;">Tap any card to open the full project PDF</p>
+    </div>
+    <div class="row g-4 justify-content-center">
+      <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+        <a href="hansita_project1.pdf" target="_blank" class="project-card">
+          <div class="project-thumb">
+            <img src="hthumb1.png" alt="Business Website" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"/>
+            <div class="thumb-fallback"><i class="bi bi-layout-text-window-reverse" style="font-size:3rem;color:rgba(59,130,246,.3);"></i></div>
+            <div class="project-overlay"><i class="bi bi-box-arrow-up-right"></i></div>
+          </div>
+          <div class="project-info">
+            <div class="project-tag">WordPress &middot; Elementor &middot; SEO</div>
+            <h4>Business Website Development</h4>
+            <p>Professional business website using WordPress and Elementor — responsive design, smooth navigation, and basic SEO optimization.</p>
+            <div class="project-arrow">View Project <i class="bi bi-arrow-right"></i></div>
+          </div>
+        </a>
+      </div>
+      <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+        <a href="hansita_project2.pdf" target="_blank" class="project-card">
+          <div class="project-thumb">
+            <img src="hthumb2.png" alt="Lead Generation Landing Page" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"/>
+            <div class="thumb-fallback"><i class="bi bi-cursor" style="font-size:3rem;color:rgba(59,130,246,.3);"></i></div>
+            <div class="project-overlay"><i class="bi bi-box-arrow-up-right"></i></div>
+          </div>
+          <div class="project-info">
+            <div class="project-tag">Landing Page &middot; Lead Generation &middot; CRO</div>
+            <h4>Lead Generation Landing Page</h4>
+            <p>Landing page focused on clear call-to-actions, optimized layout, and SEO-friendly structure to improve conversion rates.</p>
+            <div class="project-arrow">View Project <i class="bi bi-arrow-right"></i></div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider-light"/>
+
+<section id="services">
+  <div class="container">
+    <div class="text-center mb-5" data-aos="fade-up">
+      <p class="section-eyebrow" style="justify-content:center;">What I Offer</p>
+      <h2 class="section-title">Services</h2>
+      <div class="section-line center"></div>
+    </div>
+    <div class="row g-4">
+      <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100"><div class="service-card"><div class="service-num">01</div><div class="service-icon"><i class="bi bi-globe"></i></div><h5>WordPress Web Design</h5><p>Custom, responsive WordPress websites using Elementor. Focused on speed, UX, and conversion-driven layouts.</p></div></div>
+      <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200"><div class="service-card"><div class="service-num">02</div><div class="service-icon"><i class="bi bi-search"></i></div><h5>SEO Optimization</h5><p>On-page &amp; off-page SEO, keyword research, competitor analysis, and website performance improvement.</p></div></div>
+      <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300"><div class="service-card"><div class="service-num">03</div><div class="service-icon"><i class="bi bi-megaphone"></i></div><h5>Social Media Marketing</h5><p>Strategy, content creation, and management for Instagram, Facebook, and LinkedIn growth.</p></div></div>
+      <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100"><div class="service-card"><div class="service-num">04</div><div class="service-icon"><i class="bi bi-cursor"></i></div><h5>Landing Page Design</h5><p>High-converting landing pages optimised for lead generation with compelling visuals and clear CTAs.</p></div></div>
+      <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200"><div class="service-card"><div class="service-num">05</div><div class="service-icon"><i class="bi bi-graph-up-arrow"></i></div><h5>Google &amp; Meta Ads</h5><p>Targeted paid ad campaigns on Google and Meta platforms to drive traffic, leads, and sales.</p></div></div>
+      <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300"><div class="service-card"><div class="service-num">06</div><div class="service-icon"><i class="bi bi-palette"></i></div><h5>Graphic Design</h5><p>Branding, social creatives, banners, and promotional visuals using Photoshop, Illustrator &amp; CorelDRAW.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider-light"/>
+
+<section id="education">
+  <div class="container">
+    <div class="row g-4 g-lg-5">
+      <div class="col-lg-5" data-aos="fade-up">
+        <p class="section-eyebrow">My Background</p>
+        <h2 class="section-title">Education</h2>
+        <div class="section-line"></div>
+        <p style="color:var(--text-light);font-size:.92rem;line-height:1.8;">A strong foundation in business, design, and digital marketing through formal education and professional certifications.</p>
+      </div>
+      <div class="col-lg-7" data-aos="fade-up" data-aos-delay="100">
+        <div class="edu-item"><div class="edu-dot-wrap"><div class="edu-dot"></div><div class="edu-line"></div></div><div class="edu-content"><div class="edu-year">2025 &ndash; 2026</div><h5>Graphic Designing &amp; Digital Marketing</h5><p>OVS Learning &middot; 11 Months Certificate Program</p></div></div>
+        <div class="edu-item"><div class="edu-dot-wrap"><div class="edu-dot"></div><div class="edu-line"></div></div><div class="edu-content"><div class="edu-year">2024 &ndash; 2027 (Pursuing)</div><h5>Bachelor of Arts (BA)</h5><p>GCA College, Ajmer</p></div></div>
+        <div class="edu-item"><div class="edu-dot-wrap"><div class="edu-dot"></div></div><div class="edu-content"><div class="edu-year">2021 &ndash; 2023</div><h5>Senior Secondary Education</h5><p>DBN School, Ajmer &middot; 10th (2021) &amp; 12th (2023)</p></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider-light"/>
+
+<section id="contact">
+  <div class="container">
+    <div class="text-center mb-5" data-aos="fade-up">
+      <p class="section-eyebrow" style="justify-content:center;">Get In Touch</p>
+      <h2 class="section-title">Contact Me</h2>
+      <div class="section-line center"></div>
+    </div>
+    <div class="row g-4 g-lg-5">
+      <div class="col-lg-5" data-aos="fade-up">
+        <p style="color:rgba(255,255,255,.45);font-size:.92rem;line-height:1.8;margin-bottom:22px;">Have a project in mind? I'd love to hear from you.</p>
+        <a href="mailto:hanshubundel@gmail.com" class="contact-card"><div class="contact-card-icon"><i class="bi bi-envelope"></i></div><div><div class="contact-card-label">Email</div><div class="contact-card-val">hanshubundel@gmail.com</div></div></a>
+        <a href="tel:+918005572323" class="contact-card"><div class="contact-card-icon"><i class="bi bi-telephone"></i></div><div><div class="contact-card-label">Phone</div><div class="contact-card-val">+91 8005572323</div></div></a>
+        <div class="contact-card" style="cursor:default;"><div class="contact-card-icon"><i class="bi bi-geo-alt"></i></div><div><div class="contact-card-label">Location</div><div class="contact-card-val">Ajmer, Rajasthan, India</div></div></div>
+      </div>
+      <div class="col-lg-7" data-aos="fade-up" data-aos-delay="100">
+        <div class="contact-form">
+          <div class="row g-3"><div class="col-sm-6"><input type="text" placeholder="Your Name"/></div><div class="col-sm-6"><input type="email" placeholder="Your Email"/></div></div>
+          <input type="text" placeholder="Subject"/>
+          <textarea placeholder="Your Message"></textarea>
+          <button class="btn-blue w-100" onclick="alert('Thank you! Hansita will get back to you soon.')">Send Message &nbsp;<i class="bi bi-send"></i></button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-brand">Hansita<span>.</span></div>
+    <div class="footer-sub">WordPress Designer &amp; Digital Marketer</div>
+    <div class="social-links">
+      <a href="#" class="social-link" title="Instagram"><i class="bi bi-instagram"></i></a>
+      <a href="mailto:hanshubundel@gmail.com" class="social-link" title="Email"><i class="bi bi-envelope"></i></a>
+    </div>
+    <p class="footer-copy">&copy; 2026 Hansita Bundel &middot; Ajmer, Rajasthan</p>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+<script>
+window.addEventListener("load",()=>setTimeout(()=>document.getElementById("preloader").classList.add("hide"),2000));
+AOS.init({duration:700,once:true,easing:"ease-out-cubic",offset:50});
+const typedEl=document.getElementById("typed-output");
+const words=["WordPress Designer","Digital Marketer","SEO Specialist","Landing Page Expert","Meta & Google Ads"];
+let wi=0,ci=0,del=false;
+function typeLoop(){const w=words[wi];typedEl.textContent=del?w.substring(0,ci-1):w.substring(0,ci+1);del?ci--:ci++;if(!del&&ci===w.length){del=true;setTimeout(typeLoop,1800);return;}if(del&&ci===0){del=false;wi=(wi+1)%words.length;}setTimeout(typeLoop,del?55:95);}
+setTimeout(typeLoop,2300);
+let countersRun=false;
+function runCounters(){if(countersRun)return;countersRun=true;document.querySelectorAll(".counter-num").forEach(el=>{const target=+el.dataset.target;let cur=0;const step=target/80;const t=setInterval(()=>{cur+=step;if(cur>=target){el.textContent=target;clearInterval(t);}else{el.textContent=Math.floor(cur);}},20);});}
+const fc=document.querySelector(".counter-box");
+if(fc)new IntersectionObserver(e=>{if(e[0].isIntersecting)runCounters();},{threshold:.3}).observe(fc);
+document.querySelectorAll(".skill-category").forEach(cat=>{new IntersectionObserver(e=>{if(e[0].isIntersecting)cat.querySelectorAll(".skill-bar-fill").forEach((b,i)=>setTimeout(()=>b.style.width=b.dataset.width+"%",i*110));},{threshold:.15}).observe(cat);});
+const nb=document.getElementById("mainNav");
+const navMenu=document.getElementById("navMenu");
+window.addEventListener("scroll",()=>{if(window.scrollY>60){nb.style.padding="8px 0";nb.style.boxShadow="0 4px 30px rgba(0,0,0,.8)";}else{nb.style.padding="14px 0";nb.style.boxShadow="none";}let cur="";document.querySelectorAll("section[id]").forEach(s=>{if(window.scrollY>=s.offsetTop-120)cur=s.id;});document.querySelectorAll(".nav-link").forEach(l=>l.classList.toggle("active-link",l.getAttribute("href")==="#"+cur));},{passive:true});
+document.querySelectorAll(".nav-link").forEach(link=>{link.addEventListener("click",()=>{const bsc=bootstrap.Collapse.getInstance(navMenu);if(bsc)bsc.hide();});});
+</script>
+</body>
+</html>
